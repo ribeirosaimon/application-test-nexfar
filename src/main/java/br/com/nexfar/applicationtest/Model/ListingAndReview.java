@@ -17,7 +17,7 @@ public class ListingAndReview {
     private String description;
     private Date last_review;
     private Integer bedrooms;
-    private Float price;
+    private Double price;
     private Address address;
     private Integer number_of_reviews;
 
@@ -61,11 +61,11 @@ public class ListingAndReview {
         this.bedrooms = bedrooms;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
