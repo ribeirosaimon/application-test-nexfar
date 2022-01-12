@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class SortDTO {
     private String order;
-    private String propety;
+    private String property;
 
     public SortDTO(String order, String propety) {
         this.order = order;
-        this.propety = propety;
+        this.property = propety;
     }
 
     public String getOrder() {
@@ -19,12 +19,12 @@ public class SortDTO {
         this.order = order;
     }
 
-    public String getPropety() {
-        return propety;
+    public String getProperty() {
+        return property;
     }
 
-    public void setPropety(String propety) {
-        this.propety = propety;
+    public void setProperty(String property) {
+        this.property = property;
     }
 
     @Override
@@ -32,11 +32,11 @@ public class SortDTO {
         if (this == o) return true;
         if (!(o instanceof SortDTO)) return false;
         SortDTO sortDTO = (SortDTO) o;
-        return Objects.equals(getOrder(), sortDTO.getOrder()) && Objects.equals(getPropety(), sortDTO.getPropety());
+        return Objects.equals(getOrder(), sortDTO.getOrder()) && Objects.equals(getProperty(), sortDTO.getProperty());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrder(), getPropety());
+        return Objects.hash(getOrder(), getProperty());
     }
 }

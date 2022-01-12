@@ -17,10 +17,11 @@ public class ListingAndReview {
     private String description;
     private int bedrooms;
     private Float price;
+    private Date last_review;
     private ReviewScores review_scores;
     private Set<Review> reviews = new HashSet<>();
     private Address address;
-    private Date last_review;
+
 
     public String get_id() {
         return _id;
@@ -106,4 +107,5 @@ public class ListingAndReview {
     public int hashCode() {
         return Objects.hash(get_id(), getName(), getDescription(), getBedrooms(), getPrice(), getReview_scores(), getReviews(), getAddress(), getLast_review());
     }
+
 }
