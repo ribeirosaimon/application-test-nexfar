@@ -76,7 +76,7 @@ public class ListAndReviewService {
     }
 
     public List<ListingAndReview> searchMinReview(List<ListingAndReview> list, Long param) {
-        if (param != null) return list.stream().filter(e -> e.getReviews().size() > param).collect(Collectors.toList());
+        if (param != null) return list.stream().filter(e -> e.getNumber_of_reviews() > param).collect(Collectors.toList());
         return list;
     }
 

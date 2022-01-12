@@ -15,16 +15,12 @@ public class ListingAndReview {
     private String _id;
     private String name;
     private String description;
-    private int bedrooms;
-    private Float price;
     private Date last_review;
-    private Set<Review> reviews = new HashSet<>();
+    private Integer bedrooms;
+    private Float price;
     private Address address;
+    private Integer number_of_reviews;
 
-
-    public ListingAndReview(){
-
-    }
     public String get_id() {
         return _id;
     }
@@ -49,11 +45,19 @@ public class ListingAndReview {
         this.description = description;
     }
 
-    public int getBedrooms() {
+    public Date getLast_review() {
+        return last_review;
+    }
+
+    public void setLast_review(Date last_review) {
+        this.last_review = last_review;
+    }
+
+    public Integer getBedrooms() {
         return bedrooms;
     }
 
-    public void setBedrooms(int bedrooms) {
+    public void setBedrooms(Integer bedrooms) {
         this.bedrooms = bedrooms;
     }
 
@@ -65,15 +69,6 @@ public class ListingAndReview {
         this.price = price;
     }
 
-
-    public Set<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(Set<Review> reviews) {
-        this.reviews = reviews;
-    }
-
     public Address getAddress() {
         return address;
     }
@@ -82,12 +77,12 @@ public class ListingAndReview {
         this.address = address;
     }
 
-    public Date getLast_review() {
-        return last_review;
+    public Integer getNumber_of_reviews() {
+        return number_of_reviews;
     }
 
-    public void setLast_review(Date last_review) {
-        this.last_review = last_review;
+    public void setNumber_of_reviews(Integer number_of_reviews) {
+        this.number_of_reviews = number_of_reviews;
     }
 
     @Override
@@ -95,12 +90,11 @@ public class ListingAndReview {
         if (this == o) return true;
         if (!(o instanceof ListingAndReview)) return false;
         ListingAndReview that = (ListingAndReview) o;
-        return getBedrooms() == that.getBedrooms() && Objects.equals(get_id(), that.get_id()) && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getReviews(), that.getReviews()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getLast_review(), that.getLast_review());
+        return Objects.equals(_id, that._id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(last_review, that.last_review) && Objects.equals(bedrooms, that.bedrooms) && Objects.equals(price, that.price) && Objects.equals(address, that.address) && Objects.equals(number_of_reviews, that.number_of_reviews);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(get_id(), getName(), getDescription(), getBedrooms(), getPrice(), getReviews(), getAddress(), getLast_review());
+        return Objects.hash(_id, name, description, last_review, bedrooms, price, address, number_of_reviews);
     }
-
 }
