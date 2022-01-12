@@ -6,14 +6,12 @@ public class ReturnDTO {
     private String name;
 
 
-
     public ReturnDTO(String market, String description, String name) {
 
         this.market = market;
         this.description = description;
         this.name = name;
     }
-
 
 
     public String getMarket() {
