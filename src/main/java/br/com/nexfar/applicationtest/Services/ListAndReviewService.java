@@ -57,7 +57,12 @@ public class ListAndReviewService {
 
     public List<ListingAndReview> searchTerm(List<ListingAndReview> list, String param) {
         if (param != null)
-            return list.stream().filter(e -> e.getAddress().getCountry().equalsIgnoreCase(param)).collect(Collectors.toList());
+            return list
+                    .stream()
+                    .filter(e -> e.getAddress().getCountry().equalsIgnoreCase(param) ||
+                            e.getDescription().toLowerCase().contains(param) ||
+                            e.getName().toLowerCase().contains(param))
+                    .collect(Collectors.toList());
         return list;
     }
 
