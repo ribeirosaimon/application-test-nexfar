@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Document("listingsAndReviews")
+@Document(collection = "listingsAndReviews")
 public class ListingAndReview {
     @Id
     private String _id;
@@ -22,6 +22,9 @@ public class ListingAndReview {
     private Address address;
 
 
+    public ListingAndReview(){
+
+    }
     public String get_id() {
         return _id;
     }
