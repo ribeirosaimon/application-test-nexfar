@@ -18,7 +18,6 @@ public class ListingAndReview {
     private int bedrooms;
     private Float price;
     private Date last_review;
-    private ReviewScores review_scores;
     private Set<Review> reviews = new HashSet<>();
     private Address address;
 
@@ -63,13 +62,6 @@ public class ListingAndReview {
         this.price = price;
     }
 
-    public ReviewScores getReview_scores() {
-        return review_scores;
-    }
-
-    public void setReview_scores(ReviewScores review_scores) {
-        this.review_scores = review_scores;
-    }
 
     public Set<Review> getReviews() {
         return reviews;
@@ -100,12 +92,12 @@ public class ListingAndReview {
         if (this == o) return true;
         if (!(o instanceof ListingAndReview)) return false;
         ListingAndReview that = (ListingAndReview) o;
-        return getBedrooms() == that.getBedrooms() && Objects.equals(get_id(), that.get_id()) && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getReview_scores(), that.getReview_scores()) && Objects.equals(getReviews(), that.getReviews()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getLast_review(), that.getLast_review());
+        return getBedrooms() == that.getBedrooms() && Objects.equals(get_id(), that.get_id()) && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getReviews(), that.getReviews()) && Objects.equals(getAddress(), that.getAddress()) && Objects.equals(getLast_review(), that.getLast_review());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(get_id(), getName(), getDescription(), getBedrooms(), getPrice(), getReview_scores(), getReviews(), getAddress(), getLast_review());
+        return Objects.hash(get_id(), getName(), getDescription(), getBedrooms(), getPrice(), getReviews(), getAddress(), getLast_review());
     }
 
 }

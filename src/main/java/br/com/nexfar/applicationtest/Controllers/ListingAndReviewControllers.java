@@ -19,6 +19,8 @@ public class ListingAndReviewControllers {
 
     @PostMapping("search")
     public ResponseEntity<?> searchListing(@RequestBody SearchTermDTO dto) {
+        System.out.println("AQUI ENTROU");
         return ResponseEntity.ok(service.searchAirbnb(dto));
     }
+
 }
