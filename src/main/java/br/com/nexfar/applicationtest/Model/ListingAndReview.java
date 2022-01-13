@@ -97,4 +97,13 @@ public class ListingAndReview {
     public int hashCode() {
         return Objects.hash(_id, name, description, last_review, bedrooms, price, address, number_of_reviews);
     }
+
+    @Override
+    public String toString() {
+        return "ListingAndReview{" +
+                "_id='" + _id + '\'' +
+                ", last_review=" + last_review +
+                ", price=" + price +
+                '}';
+    }
 }

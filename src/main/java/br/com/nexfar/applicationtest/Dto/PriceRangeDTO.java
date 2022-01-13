@@ -39,4 +39,12 @@ public class PriceRangeDTO {
     public int hashCode() {
         return Objects.hash(getMin(), getMax());
     }
+
+    @Override
+    public String toString() {
+        return "PriceRangeDTO{" +
+                "min=" + min +
+                ", max=" + max +
+                '}';
+    }
 }

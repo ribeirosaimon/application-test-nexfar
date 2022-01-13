@@ -20,22 +20,24 @@ public class ListAndReviewService {
     ListingAndReviewRepository repository;
 
     public List<ReturnDTO> searchAirbnb(SearchTermDTO dto) {
+        // searchTerm é obrigatorio
+        if (dto.getSearchTerm() == null) throw new RuntimeException("Need SearchTerm");
+
+
         // Se o Valor minimo for maior que o valor maximo vai retornar um Erro
-        if (dto.getPriceRange().getMin() > dto.getPriceRange().getMax())
-            throw new RuntimeException("minimum value is greater than maximum value");
+        if (dto.getPriceRange() != null) {
+            if (dto.getPriceRange().getMin() == null && dto.getPriceRange().getMax() == null && dto.getPriceRange().getMin() > dto.getPriceRange().getMax())
+                throw new RuntimeException("minimum value is greater than maximum value");
+        }
+
 
         // Poderia fazer uma stream gigante, porem seria dificil entendimento
-        System.out.println("Passou 1");
-        List<ListingAndReview> listBase = repository.findAll();
-        System.out.println("Passou 2");
-        List<ListingAndReview> listSearchTerm = searchTerm(listBase, dto.getSearchTerm());
-        System.out.println("Passou 3");
-        List<ListingAndReview> listMinReview = searchMinReview(listSearchTerm, dto.getMinReview());
-        System.out.println("Passou 4");
+        List<ListingAndReview> listBase = repository.findListingAndReviewByAddress_Country(dto.getSearchTerm());
+        List<ListingAndReview> listMinReview = searchMinReview(listBase, dto.getMinReview());
         List<ListingAndReview> listPriceRange = searchPriceRange(listMinReview, dto.getPriceRange());
-        System.out.println("Passou 5");
         List<ListingAndReview> finalList = searchBedrooms(listPriceRange, dto.getTotalBedrooms());
 
+        //Se caso o parametro sort estiver null, vai assumir "ASC" e "PRICE" como default
         if (dto.getSort() == null) {
             dto.setSort(new SortDTO("ASC", "PRICE"));
         } else if (dto.getSort().getOrder() == null) {
@@ -44,48 +46,56 @@ public class ListAndReviewService {
             dto.getSort().setProperty("PRICE");
         }
 
+        // ordenei as listas por um comparator,
         if (dto.getSort().getProperty().equalsIgnoreCase("price")) {
-            System.out.println("Passou 6");
-            if (dto.getSort().getOrder().equalsIgnoreCase("DES")) {
+            if (dto.getSort().getOrder().equalsIgnoreCase("des")) {
                 finalList.sort(new ComparatorPrice().reversed());
             } else {
                 finalList.sort(new ComparatorPrice());
             }
         } else if (dto.getSort().getProperty().equalsIgnoreCase("review")) {
-            System.out.println("Passou 7");
-            if (dto.getSort().getOrder().equalsIgnoreCase("DES")) {
+            if (dto.getSort().getOrder().equalsIgnoreCase("des")) {
+                // e tambem pelas datas ( fiz por uma função pois tem valores nulos)
                 finalList = sortedDate(finalList, false);
             } else {
                 finalList = sortedDate(finalList, true);
             }
         }
-
+        // passei a lista para um DTO de resposta
         return formatList(finalList);
     }
 
 
-    public List<ListingAndReview> searchTerm(List<ListingAndReview> list, String param) {
-        if (param != null)
-            return list
-                    .stream()
-                    .filter(e -> e.getAddress().getCountry().equalsIgnoreCase(param) ||
-                            e.getDescription().toLowerCase().contains(param) ||
-                            e.getName().toLowerCase().contains(param))
-                    .collect(Collectors.toList());
-        return list;
-    }
+    // Tinha Colocado um findall para poder pegar os parametros no Contry, Description ou Name, porem pela lentidão
+    // nao foi viavel
+
+//    public List<ListingAndReview> searchTerm(List<ListingAndReview> list, String param) {
+//        if (param != null)
+//            return list
+//                    .stream()
+//                    .filter(e -> e.getAddress().getCountry().equalsIgnoreCase(param) ||
+//                            e.getDescription().toLowerCase().contains(param) ||
+//                            e.getName().toLowerCase().contains(param))
+//                    .collect(Collectors.toList());
+//        return list;
+//    }
 
     public List<ListingAndReview> searchMinReview(List<ListingAndReview> list, Long param) {
-        if (param != null) return list.stream().filter(e -> e.getNumber_of_reviews() > param).collect(Collectors.toList());
+        // numeros de review deve ser maior que o numero do parametro enviado
+        if (param != null)
+            return list.stream().filter(e -> e.getNumber_of_reviews() > param).collect(Collectors.toList());
         return list;
     }
 
     public List<ListingAndReview> searchPriceRange(List<ListingAndReview> list, PriceRangeDTO param) {
         // Se o parametro for null, retorna a mesma lista;
-        if (param == null) return list;
+        if (param == null) {
+            return list;
+        }
 
-            // se algum dos parametros não for null faça o filter
-        else if (param.getMax() != null && param.getMin() != null) {
+
+        // se algum dos parametros não for null faça o filter
+        if (param.getMax() != null && param.getMin() != null) {
             return list.stream()
                     .filter(e -> e.getPrice() >= param.getMin())
                     .filter(e -> e.getPrice() <= param.getMax())
@@ -104,11 +114,14 @@ public class ListAndReviewService {
     }
 
     public List<ListingAndReview> searchBedrooms(List<ListingAndReview> list, Integer param) {
-        if (param != null) return list.stream().filter(e -> e.getBedrooms() >= param).collect(Collectors.toList());
+        // numero de quartos deve ser maior que o parametro
+        if (param != null)
+            return list.stream().filter(e -> (e.getBedrooms() == null ? 0 : e.getBedrooms()) >= param).collect(Collectors.toList());
         return list;
     }
 
     public List<ListingAndReview> sortedDate(List<ListingAndReview> list, boolean reverse) {
+        // ordenação pela data
         if (reverse) {
             return list
                     .stream()
@@ -119,13 +132,17 @@ public class ListAndReviewService {
             return list
                     .stream()
                     .sorted(Comparator
-                            .comparing(ListingAndReview::getLast_review, Comparator.nullsFirst(Comparator.reverseOrder())))
+                            .comparing(ListingAndReview::getLast_review, Comparator.nullsLast(Comparator.naturalOrder())))
                     .collect(Collectors.toList());
         }
     }
 
     public List<ReturnDTO> formatList(List<ListingAndReview> list) {
+        // formata a lista para o DTO, coloquei esse print para caso queira confirmar os valores e data
+        System.out.println("------------");
+        list.forEach(System.out::println);
         return list.stream()
-                .map(e -> new ReturnDTO(e.getAddress().getMarket(), e.getDescription(), e.getName())).collect(Collectors.toList());
+                .map(e -> new ReturnDTO(e.getAddress().getMarket(), e.getDescription(), e.getName()))
+                .collect(Collectors.toList());
     }
 }

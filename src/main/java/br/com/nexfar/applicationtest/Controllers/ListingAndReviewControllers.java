@@ -14,17 +14,8 @@ public class ListingAndReviewControllers {
     @Autowired
     ListAndReviewService service;
 
-    @Autowired
-    ListingAndReviewRepository repository;
-
-    @GetMapping
-    public ResponseEntity<?> teste(){
-        return ResponseEntity.ok(repository.findAll());
-    }
-
     @PostMapping("/search")
     public ResponseEntity<?> searchListing(@RequestBody SearchTermDTO dto) {
-        System.out.println("AQUI ENTROU");
         return ResponseEntity.ok(service.searchAirbnb(dto));
     }
 
