@@ -32,7 +32,7 @@ public class ListAndReviewService {
 
 
         // Poderia fazer uma stream gigante, porem seria dificil entendimento
-        List<ListingAndReview> listBase = repository.findListingAndReviewByAddress_Country(dto.getSearchTerm());
+        List<ListingAndReview> listBase = repository.findCompletQuery(dto.getSearchTerm(), dto.getPriceRange().getMin(), dto.getPriceRange().getMax(), dto.getMinReview(), dto.getTotalBedrooms());
         List<ListingAndReview> listMinReview = searchMinReview(listBase, dto.getMinReview());
         List<ListingAndReview> listPriceRange = searchPriceRange(listMinReview, dto.getPriceRange());
         List<ListingAndReview> finalList = searchBedrooms(listPriceRange, dto.getTotalBedrooms());
