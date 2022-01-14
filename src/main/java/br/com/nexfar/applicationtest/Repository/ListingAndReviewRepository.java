@@ -12,14 +12,21 @@ public interface ListingAndReviewRepository extends MongoRepository<ListingAndRe
     @Query("{$or: [{'address.country' : { '$regex' : '?0' , $options: 'i'}}," +
             "{'description': { '$regex' : '?0' , $options: 'i'}}," +
             "{'name':{ '$regex' : '?0' , $options: 'i'}}]," +
-            "$and: [{ 'price' : { $gte : ?1 } }," +
-            " { 'price' : { $lte : ?2 } }," +
-            " {'number_of_reviews':{$gte:?3}}," +
+            "$and: [{'number_of_reviews':{$gte:?1}}," +
+            "{ 'price' : { $gte : ?2 } }," +
+            "{ 'price' : { $lte : ?3 } }," +
             " { 'bedrooms' : { $gte : ?4 }}]}")
-    List<ListingAndReview> findCompletQuery(String country,
-                                                                 Double max, Double min,
-                                                                 Long reviews,
-                                                                 Integer bedrooms);
+    List<ListingAndReview> newQueryAirbnb(String country, Long reviews,
+                                          Double min, Double max, Integer bedrooms);
 
+
+    @Query("{$or: [{'address.country' : { '$regex' : '?0' , $options: 'i'}}," +
+            "{'description': { '$regex' : '?0' , $options: 'i'}}," +
+            "{'name':{ '$regex' : '?0' , $options: 'i'}}]," +
+            "$and: [{'number_of_reviews':{$gte:?1}}," +
+            "{ 'price' : { $gte : ?2 } }," +
+            " { 'bedrooms' : { $gte : ?3 }}]}")
+    List<ListingAndReview> newQueryAirbnbWithoughtMax(String country, Long reviews,
+                                                      Double min, Integer bedrooms);
 
 }
