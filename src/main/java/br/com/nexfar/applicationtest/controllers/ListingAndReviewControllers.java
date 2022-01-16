@@ -1,8 +1,8 @@
-package br.com.nexfar.applicationtest.Controllers;
+package br.com.nexfar.applicationtest.controllers;
 
-import br.com.nexfar.applicationtest.Dto.ReturnDTO;
-import br.com.nexfar.applicationtest.Dto.SearchTermDTO;
-import br.com.nexfar.applicationtest.Services.ListAndReviewService;
+import br.com.nexfar.applicationtest.dto.ReturnDTO;
+import br.com.nexfar.applicationtest.dto.SearchTermDTO;
+import br.com.nexfar.applicationtest.services.ListAndReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

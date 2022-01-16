@@ -1,6 +1,6 @@
-package br.com.nexfar.applicationtest.Comparable;
+package br.com.nexfar.applicationtest.comparable;
 
-import br.com.nexfar.applicationtest.Model.ListingAndReview;
+import br.com.nexfar.applicationtest.model.ListingAndReview;
 
 import java.util.Comparator;
 

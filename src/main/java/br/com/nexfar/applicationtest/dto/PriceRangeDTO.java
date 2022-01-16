@@ -1,4 +1,4 @@
-package br.com.nexfar.applicationtest.Dto;
+package br.com.nexfar.applicationtest.dto;
 
 import java.util.Objects;
 

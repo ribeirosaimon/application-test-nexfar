@@ -1,6 +1,6 @@
-package br.com.nexfar.applicationtest.Repository;
+package br.com.nexfar.applicationtest.repository;
 
-import br.com.nexfar.applicationtest.Model.ListingAndReview;
+import br.com.nexfar.applicationtest.model.ListingAndReview;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 

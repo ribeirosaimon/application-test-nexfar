@@ -1,6 +1,6 @@
-package br.com.nexfar.applicationtest.Exception.Handler;
+package br.com.nexfar.applicationtest.exception.handler;
 
-import br.com.nexfar.applicationtest.Exception.ExceptionResponse;
+import br.com.nexfar.applicationtest.exception.ExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

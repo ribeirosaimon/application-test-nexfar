@@ -1,4 +1,4 @@
-package br.com.nexfar.applicationtest.Exception;
+package br.com.nexfar.applicationtest.exception;
 
 import java.io.Serializable;
 import java.util.Date;

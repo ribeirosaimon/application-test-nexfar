@@ -1,12 +1,12 @@
-package br.com.nexfar.applicationtest.Services;
+package br.com.nexfar.applicationtest.services;
 
-import br.com.nexfar.applicationtest.Comparable.ComparatorPrice;
-import br.com.nexfar.applicationtest.Dto.PriceRangeDTO;
-import br.com.nexfar.applicationtest.Dto.ReturnDTO;
-import br.com.nexfar.applicationtest.Dto.SearchTermDTO;
-import br.com.nexfar.applicationtest.Dto.SortDTO;
-import br.com.nexfar.applicationtest.Model.ListingAndReview;
-import br.com.nexfar.applicationtest.Repository.ListingAndReviewRepository;
+import br.com.nexfar.applicationtest.comparable.ComparatorPrice;
+import br.com.nexfar.applicationtest.dto.PriceRangeDTO;
+import br.com.nexfar.applicationtest.dto.ReturnDTO;
+import br.com.nexfar.applicationtest.dto.SearchTermDTO;
+import br.com.nexfar.applicationtest.dto.SortDTO;
+import br.com.nexfar.applicationtest.model.ListingAndReview;
+import br.com.nexfar.applicationtest.repository.ListingAndReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
