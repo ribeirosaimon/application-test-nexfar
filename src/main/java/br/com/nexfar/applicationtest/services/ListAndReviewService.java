@@ -25,8 +25,8 @@ public class ListAndReviewService {
         SearchTermDTO searchTermDTO = formatDto(dto);
 
         // Se o Valor minimo for maior que o valor maximo vai retornar um Erro
-        if (dto.getPriceRange() != null) {
-            if (dto.getPriceRange().getMin() == null && dto.getPriceRange().getMax() == null && dto.getPriceRange().getMin() > dto.getPriceRange().getMax())
+        if (dto.getPriceRange() != null && dto.getPriceRange().getMax() != null) {
+            if (dto.getPriceRange().getMin() > dto.getPriceRange().getMax())
                 throw new RuntimeException("minimum value is greater than maximum value");
         }
         if (dto.getPriceRange().getMax() == null) {
