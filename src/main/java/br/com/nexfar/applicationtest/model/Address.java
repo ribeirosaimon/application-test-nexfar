@@ -1,4 +1,4 @@
-package br.com.nexfar.applicationtest.Model;
+package br.com.nexfar.applicationtest.model;
 
 import java.util.Objects;
 

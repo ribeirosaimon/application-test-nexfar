@@ -1,4 +1,4 @@
-package br.com.nexfar.applicationtest.Dto;
+package br.com.nexfar.applicationtest.dto;
 
 public class ReturnDTO {
     private String market;

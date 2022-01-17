@@ -1,13 +1,11 @@
-package br.com.nexfar.applicationtest.Model;
+package br.com.nexfar.applicationtest.model;
 
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Document(collection = "listingsAndReviews")
 public class ListingAndReview {
